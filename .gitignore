@@ -1,0 +1,55 @@
+# Secrets
+.env
+*.env
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment folders
+env/
+venv/
+.venv/
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+
+# Data artifacts
+*.pkl
+*.h5
+*.json
+*.db
+*.sqlite
+
+# Log files
+*.log
+
+# Test outputs
+htmlcov/
+.tox/
+.coverage
+coverage.xml
+*.cover
+.pytest_cache/
+
+# Pip metadata
+*.egg-info/
+*.egg
+dist/
+build/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Streamlit cache
+.streamlit/config.toml
+.streamlit/*.json
+.streamlit/cache/
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
