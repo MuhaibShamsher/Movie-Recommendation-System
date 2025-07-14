@@ -5,9 +5,9 @@ import os
 from dotenv import load_dotenv
 
 
+load_dotenv()
 movies = pickle.load(open('movies.pkl', 'rb'))
 similarity = pickle.load(open('similarity.pkl', 'rb'))
-load_dotenv()
 
 
 POSTER_BASE = "https://image.tmdb.org/t/p/w500"
@@ -40,7 +40,6 @@ def recommend(movie: str):
     similarity_vector = list(enumerate(similarity[index])) # provide index to each movie distance
     top_similar = sorted(similarity_vector, key=lambda x: x[1], reverse=True)[1:9]
 
-    recommend_ids = []
     recommend_titles = []
     recommend_posters = []
 
@@ -49,23 +48,20 @@ def recommend(movie: str):
         title = movies.iloc[idx].title
         poster = fetchPosterPath(movie_id)
 
-        recommend_ids.append(movie_id)
         recommend_titles.append(title)
         recommend_posters.append(poster)
 
-    return recommend_ids, recommend_titles, recommend_posters
+    return recommend_titles, recommend_posters
 
 
 def show_recommendations(titles, posters):
-    counter = 0
     for row in range(0, len(titles), 4):   # 4 posters per row
         cols = st.columns(4)
         for i, col in enumerate(cols):
             if row + i < len(titles):
                 with col:
-                    st.image(posters[counter], use_container_width=True)
+                    st.image(posters[row + i], use_container_width=True)
                     st.caption(titles[row + i])
-                    counter += 1
 
 st.header("Movie Recommendation System", divider=True)
 
@@ -75,5 +71,5 @@ with st.form("movie_form"):
 
 if submitted:
     st.write("Recommended Movies:")
-    ids, titles, posters = recommend(title)
+    titles, posters = recommend(title)
     show_recommendations(titles, posters)
